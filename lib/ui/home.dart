@@ -84,34 +84,35 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 300,
                 child: DrawerHeader(
-                    decoration: BoxDecoration(), child: _getDrawerHeader()),
+                    decoration: const BoxDecoration(),
+                    child: _getDrawerHeader()),
               ),
               _showCategory(context),
               GestureDetector(
                 onTap: () async {
                   Navigator.pop(context);
-                  await Get.to(ProfilePage());
+                  await Get.to(const ProfilePage());
 
                   setState(() {
                     isThemeUpdated = isThemeUpdated;
                   });
                 },
                 child: ListTile(
-                    leading: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(180),
-                          color: ColorConstants.buttonColor.withOpacity(0.3),
-                        ),
-                        child: Icon(Icons.color_lens,
-                            size: 20,
-                            color:
-                                Get.isDarkMode ? Colors.white : Colors.black)),
-                    title: Text(
-                      "Theme",
-                      style: subHeadingNormalStyle,
-                    )),
+                  leading: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(180),
+                        color: ColorConstants.buttonColor.withOpacity(0.3),
+                      ),
+                      child: Icon(Icons.color_lens,
+                          size: 20,
+                          color: Get.isDarkMode ? Colors.white : Colors.black)),
+                  title: Text(
+                    "Theme",
+                    style: subHeadingNormalStyle,
+                  ),
+                ),
               ),
               ListTile(
                   trailing: Transform.scale(
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> {
         body: Column(children: [
           _addTaskBar(),
           _showQuote(),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           _taskTitle(),
           showCount
               ? Padding(
@@ -157,11 +158,11 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: [
                           Text("TODO : ${todoCount}"),
-                          SizedBox(width: 15),
+                          const SizedBox(width: 15),
                           Text("COMPLETED : ${completedCount}")
                         ],
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
@@ -173,19 +174,19 @@ class _HomePageState extends State<HomePage> {
                                     ? 0
                                     : (completedCount * 100) /
                                         ((todoCount + completedCount) * 100),
-                            valueColor: AlwaysStoppedAnimation<Color>(
+                            valueColor: const AlwaysStoppedAnimation<Color>(
                                 ColorConstants.progressColor),
                             backgroundColor:
                                 ColorConstants.progressColor.withOpacity(0.2),
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 )
               : Container(),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           _showTasks()
         ]));
   }
@@ -194,7 +195,7 @@ class _HomePageState extends State<HomePage> {
     return Container(child: Obx(() {
       if (_taskController.taskList.length > 0) {
         return Container(
-            child: Column(children: [
+            child: const Column(children: [
           Text("My Tasks",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           SizedBox(height: 20)
@@ -211,24 +212,24 @@ class _HomePageState extends State<HomePage> {
           height: 100,
           child: ClipRRect(
               borderRadius: BorderRadius.circular(80), child: _loadImage())),
-      SizedBox(height: 10),
+      const SizedBox(height: 10),
       Text(
         userName,
         style: subHeadingStyle,
       ),
       Container(
-          margin: EdgeInsets.only(top: 14),
+          margin: const EdgeInsets.only(top: 14),
           child: MyButton(
               label: "Edit Profile",
               onTap: () async {
-                await Get.to(EditProfilePage());
+                await Get.to(const EditProfilePage());
                 //Set state to reload User name & profile pic if updated
                 setState(() {
                   userName = UserDetailService().userName ?? "User Name";
                   imagePath = UserDetailService().profileImagePath;
                 });
               })),
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
     ]);
   }
 
@@ -239,7 +240,7 @@ class _HomePageState extends State<HomePage> {
       elevation: 0,
       actions: [
         GestureDetector(onTap: () async {}, child: _loadImage()),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
       ],
     );
     // SizedBox(width: 10));
@@ -247,21 +248,26 @@ class _HomePageState extends State<HomePage> {
 
   Widget _loadImage() {
     if (imagePath == null) {
-      return CircleAvatar(
-          child: Icon(
-            Icons.person,
-            color: Colors.black,
-          ),
-          radius: 20,
-          backgroundColor: Colors.grey);
+      return const CircleAvatar(
+        radius: 20,
+        backgroundColor: Colors.grey,
+        child: Icon(
+          Icons.person,
+          color: Colors.black,
+        ),
+      );
     } else {
       return Container(
-          width: 40.0,
-          height: 40.0,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  fit: BoxFit.fill, image: FileImage(File(imagePath!)))));
+        width: 40.0,
+        height: 40.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: FileImage(File(imagePath!)),
+          ),
+        ),
+      );
     }
   }
 
@@ -275,7 +281,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _updateCount() {
-    Timer(Duration(seconds: 1), () {
+    Timer(const Duration(seconds: 1), () {
       int c1 = 0;
       int c2 = 0;
       if (_taskController.taskList.length == 0) {
@@ -323,11 +329,11 @@ class _HomePageState extends State<HomePage> {
     _taskController.getTasks();
 
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text("Hi ${userName}", style: boldHeadingTextStyle),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             "Today - ${DateFormat.yMMMMd().format(DateTime.now())}",
             style: subHeadingStyle,
@@ -347,14 +353,14 @@ class _HomePageState extends State<HomePage> {
 
   _taskTitle() {
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text("Today's Task", style: toolbarTitleStyle),
         ]),
         GestureDetector(
           onTap: () async {
-            await Get.to(TaskListPage());
+            await Get.to(const TaskListPage());
             //Wait & fetch list again to refresh the list on home page.
             _taskController.getTasks();
             _updateCount();
@@ -391,13 +397,13 @@ class _HomePageState extends State<HomePage> {
         selectedTextColor: Colors.white,
         deactivatedColor: Colors.white,
         monthTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
                 fontSize: 11, fontWeight: FontWeight.w400, color: Colors.grey)),
         dateTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
                 fontSize: 16, fontWeight: FontWeight.w800, color: Colors.grey)),
         dayTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
                 fontSize: 12, fontWeight: FontWeight.w400, color: Colors.grey)),
       ),
     );
@@ -467,9 +473,9 @@ class _HomePageState extends State<HomePage> {
 
   _getNewTaskTile() {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(bottom: 12),
+        margin: const EdgeInsets.only(bottom: 12),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -477,14 +483,14 @@ class _HomePageState extends State<HomePage> {
               ClipPath(
                 clipper: DolDurmaClipper(right: 40, holeRadius: 20),
                 child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(
                         Radius.circular(15),
                       ),
                       color: Colors.blueAccent,
                     ),
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     child: Row(children: [
                       Expanded(
                           child: Column(
@@ -493,38 +499,38 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "task?.title " ?? "",
                               style: GoogleFonts.lato(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black87),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.access_time_rounded,
                                   color: Colors.black87,
                                   size: 18,
                                 ),
-                                SizedBox(width: 4),
+                                const SizedBox(width: 4),
                                 Text(
                                   "task.startTime - task!.endTime",
                                   style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                         fontSize: 13, color: Colors.black87),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 12),
+                            const SizedBox(height: 12),
                             Text(
                               "task?.note" ?? "",
                               style: GoogleFonts.lato(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                     fontSize: 15, color: Colors.black87),
                               ),
                             ),
@@ -534,7 +540,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "COMPLETED",
                           style: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
@@ -577,10 +583,10 @@ class _HomePageState extends State<HomePage> {
   _showBottomSheet(BuildContext context, Task task) {
     Get.bottomSheet(Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
             color: Get.isDarkMode ? Colors.grey.shade800 : Colors.white),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         height: MediaQuery.of(context).size.height * 0.38,
         child: Column(
           children: [
@@ -590,7 +596,7 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50), color: Colors.grey),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _bottomSheetButton(
                 context: context,
                 label: "View Task",
@@ -624,7 +630,7 @@ class _HomePageState extends State<HomePage> {
                   _updateCount();
                   Get.back();
                 }),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             _bottomSheetButton(
                 context: context,
                 label: "Close",
@@ -657,7 +663,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.all(5),
+        margin: const EdgeInsets.all(5),
         height: 50,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
@@ -684,7 +690,7 @@ class _HomePageState extends State<HomePage> {
     var height = size.height;
     var width = size.width;
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
       child: Card(
@@ -696,7 +702,7 @@ class _HomePageState extends State<HomePage> {
         ),
         elevation: 0,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -705,7 +711,7 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.justify,
                 style: quotesTextStyle,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Align(
                   alignment: Alignment.bottomRight,
                   child: Text(
@@ -770,7 +776,7 @@ _showCategory(BuildContext context) {
   return GestureDetector(
     onTap: () {
       Navigator.pop(context);
-      Get.to(BoardsListPage());
+      Get.to(const BoardsListPage());
     },
     child: ListTile(
         leading: Container(

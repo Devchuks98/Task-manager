@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_progress_tracker/models/colors.dart';
 import '../services/theme_services.dart';
 
 class MyButton extends StatelessWidget {
@@ -16,8 +17,9 @@ class MyButton extends StatelessWidget {
         width: 130,
         height: 40,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: ColorConstants.buttonColor),
+          borderRadius: BorderRadius.circular(10),
+          color: AppColor.primaryColor1,
+        ),
         child: Center(
             child: Text(
           label,

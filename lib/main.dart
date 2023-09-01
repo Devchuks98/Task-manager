@@ -22,10 +22,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // GetMaterialApp is used instead MaterialApp to reflect changes using Get
     return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'TODO DAY',
         theme: Themes.light,
         darkTheme: Themes.dark,
         themeMode: ThemeService().theme,
-        home: HomePage());
+        home: const HomePage());
   }
 }

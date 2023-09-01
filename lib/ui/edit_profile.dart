@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_progress_tracker/models/colors.dart';
 import 'package:my_progress_tracker/ui/theme.dart';
 import '../services/theme_services.dart';
 import '../services/user_detail_service.dart';
@@ -49,7 +50,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             height: 30,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(180),
-                              color: ColorConstants.iconColor,
+                              color: AppColor.primaryColor1,
                             ),
                             child: Icon(
                               Icons.edit,
@@ -61,7 +62,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ]),
                   TextInputFeild(
                     hint: UserDetailService().userName ?? "",
-                    label: "Your name",
+                    label: "Enter Your name",
                     widget: null,
                     controller: _userNameController,
                   ),
