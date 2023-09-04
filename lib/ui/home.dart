@@ -581,7 +581,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _showBottomSheet(BuildContext context, Task task) {
-    Get.bottomSheet(Container(
+    Get.bottomSheet(
+      Container(
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -640,7 +641,9 @@ class _HomePageState extends State<HomePage> {
                 },
                 isClose: true),
           ],
-        )));
+        ),
+      ),
+    );
   }
 
   buildShowDialog(BuildContext context) {
