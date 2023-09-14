@@ -710,7 +710,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '${data?.content ?? "Don't talk about what you have done or what you are going to do."}',
+                '${data?.content ?? "The best way to predict the future is to create it."}',
                 textAlign: TextAlign.justify,
                 style: quotesTextStyle,
               ),
@@ -718,7 +718,7 @@ class _HomePageState extends State<HomePage> {
               Align(
                   alignment: Alignment.bottomRight,
                   child: Text(
-                    data?.author ?? "Thomas Jefferson",
+                    data?.author ?? "Peter Drucker",
                     textAlign: TextAlign.justify,
                     style: quotesTextStyle,
                   ))
